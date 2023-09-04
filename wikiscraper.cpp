@@ -25,10 +25,10 @@ using std::unordered_map;   using std::unordered_set;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // BEGIN STUDENT CODE HERE
+
+
 bool valid_wikilink(const string& link) {
-    // replace these lines!
-    (void) link;
-    throw std::invalid_argument("Not implemented yet.\n");
+    return std::all_of(link.begin(), link.end(), [](char c){ return c != '#' && c != ':';});
 }
 // END STUDENT CODE HERE
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,11 +49,14 @@ unordered_set<string> findWikiLinks(const string& inp) {
         // After doing so, break out of the while loop if there are no occurrences of delim left
         // (use your work from the line above).
         // Estimated length: 2-3 lines
-
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         // BEGIN STUDENT CODE HERE
-        // Please delete this line when you start working!
-        throw std::invalid_argument("Not implemented yet.\n");
+        url_start = std::search(url_start, end, delim.begin(), delim.end());
+        if (url_start == end)
+        {
+            break;
+        }
+        advance(url_start, 12);
         // END STUDENT CODE HERE
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -63,11 +66,10 @@ unordered_set<string> findWikiLinks(const string& inp) {
         // a string—std::search looks for a series of elements in a container, like a substring in a string. 
         // remember that a string is represented as an array of characters, and is also a container!)
         // Estimated length: 1 lines
-
         ///////////////////////////////////////////////////////////////////////////////////////////////////
-        // BEGIN STUDENT CODE HERE (delete/edit this line)
-        auto url_end = url_start;
-        // END STUDENT CODE HERE
+        auto url_end = std::find(url_start, end, '\"'); 
+        // cout << *url_start << " " << *url_end<< endl;
+        // auto url_end = std::find(url_start, end, "\"");
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
         // TODO: ASSIGNMENT 2 TASK 3:
@@ -77,7 +79,7 @@ unordered_set<string> findWikiLinks(const string& inp) {
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         // BEGIN STUDENT CODE HERE (delete/edit this line)
-        string link;
+        string link(url_start, url_end);
         // END STUDENT CODE HERE
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -90,7 +92,6 @@ unordered_set<string> findWikiLinks(const string& inp) {
         }
 
         url_start = url_end;
-
     }
     return ret;
 

@@ -18,6 +18,9 @@ const string suf = "\">";
  * TEST #1: Valid Wikilink Basic Check: valid
  ********************************************/
 const string valid_wikilink_test1() {
+    // if (valid_wikilink(pre + "hello" + suf) == true) {
+    //     printf("yes");
+    // }
     return valid_wikilink(pre + "hello" + suf) ? "valid" : "invalid";
 }
 

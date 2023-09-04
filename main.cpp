@@ -39,11 +39,12 @@ using std::unordered_set;   using std::cin;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // BEGIN STUDENT CODE HERE
-int numCommonLinks(const unordered_set<string>& curr_set, const unordered_set<string>& target_set) {
-    // replace all of these lines!
-    (void) target_set;
-    (void) curr_set;
-    return 0; 
+int numCommonLinks(const unordered_set<string>&curr_set, const unordered_set<string>& target_set) {
+    int nm = std::count_if(curr_set.begin(), curr_set.end(), [target_set](string s)
+    {
+        auto got = target_set.find(s);
+        return got == target_set.end() ? true : false; 
+    });
 }
 // END STUDENT CODE HERE
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,12 +65,10 @@ vector<string> findWikiLadder(const string& start_page, const string& end_page) 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // BEGIN STUDENT CODE HERE
     auto cmp_fn = [&w, &target_set](const vector<string>& left, const vector<string>& right) {
-        // replace all of these lines.
-        (void) w;
-        (void) target_set;
-        (void) left;
-        (void) right;
-        return false; // replace this line! make sure to use numCommonLinks.
+        
+        int num1 = numCommonLinks(left, target_set);
+        int num2 = numCommonLinks(right, target_set);
+        return num1 < num2;
     };
     // END STUDENT CODE HERE
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,8 +83,6 @@ vector<string> findWikiLadder(const string& start_page, const string& end_page) 
     // something like priority_queue<...> queue(...);
     // please delete ALL 4 of these lines! they are here just for the code to compile.
     std::priority_queue<vector<string>> queue;
-    throw std::invalid_argument("Not implemented yet.\n");
-    return {};
 
     // END STUDENT CODE HERE
     ///////////////////////////////////////////////////////////////////////////////////////////////////
